@@ -1,0 +1,12 @@
+.layout {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &__main {
+    width: calc(100dvw - 190px);
+    padding-block: 20px;
+    align-self: flex-end;
+    height: 100dvh;
+  }
+}

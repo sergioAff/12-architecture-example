@@ -1,0 +1,92 @@
+<div
+  class="custom-input"
+  [class.custom-input--checkbox]="config.type === 'checkbox'"
+  [formGroup]="formGroup"
+>
+  <label
+    class="custom-input__label"
+    [for]="config.name"
+    aria-label="Label"
+    role="label"
+  >
+    {{ config.label }}
+  </label>
+
+  @if (!isArray) { @if (config.type === 'select') {
+  <select
+    class="custom-input__input"
+    [id]="config.name"
+    aria-label="Select"
+    role="combobox"
+    [formControlName]="config.name"
+  >
+    @for (option of config.options; track option) {
+    <option [value]="option.value">
+      {{ option.label }}
+    </option>
+    }
+  </select>
+
+  } @else {
+  <input
+    class="custom-input__input"
+    [class.custom-input__input--checkbox]="config.type === 'checkbox'"
+    [id]="config.name"
+    aria-label="Input"
+    role="input"
+    [type]="config.type || ''"
+    [formControlName]="config.name"
+    [placeholder]="config.placeholder || ''"
+  />
+  } } @else {
+  <div
+    class="custom-input__array"
+    aria-label="array"
+    role="list"
+    [formArrayName]="config.name"
+  >
+    @for (item of getFormArrayControls(); track $index) {
+    <div
+      class="custom-input__array-item"
+      role="listitem"
+      aria-label="List item"
+    >
+      <select
+        class="custom-input__input custom-input__input--array"
+        [formControlName]="$index"
+        aria-label="Select"
+        role="combobox"
+      >
+        @for (option of config.options; track option) {
+        <option [value]="option.value">
+          {{ option.label }}
+        </option>
+        }
+      </select>
+      <button
+        type="button"
+        (click)="removeItem($index)"
+        class="custom-input__array-button custom-input__array-button--remove"
+        aria-label="Remove"
+      >
+        Remove
+      </button>
+    </div>
+    }
+    <button
+      type="button"
+      (click)="addItem('')"
+      class="custom-input__array-button custom-input__array-button--add"
+      aria-label="Add"
+      role="button"
+    >
+      Add Dish
+    </button>
+  </div>
+  } @if (formGroup.get(config.name)?.invalid &&
+  formGroup.get(config.name)?.touched) {
+  <div class="custom-input__error">
+    <span>{{ config.errorMessage || "Invalid input" }}</span>
+  </div>
+  }
+</div>

@@ -1,0 +1,18 @@
+@use "../../../ui/styles/mixins.scss" as mixins;
+@use "../../../ui/styles/variables.scss" as variables;
+
+.header {
+  &__logo {
+    @include mixins.flex-center(column, center, center);
+    padding-top: 10px;
+
+    img {
+      transition: filter 0.3s ease-in-out;
+      width: 70px;
+
+      &:hover {
+        filter: drop-shadow(0 0 10px variables.$primary-color);
+      }
+    }
+  }
+}

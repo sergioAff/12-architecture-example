@@ -1,0 +1,31 @@
+@use "../../styles/variables.scss" as variables;
+@use "../../styles/mixins.scss" as mixins;
+
+.main {
+  &__container {
+    @include mixins.flex-center();
+  }
+
+  &__form {
+    @include mixins.flex-center(column, center, center, 30px);
+    width: 25%;
+    padding: 20px;
+    background-color: variables.$bg-color-1;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    &-actions {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+    }
+
+    &-submit {
+      @include mixins.button-form();
+    }
+
+    &-cancel {
+      @include mixins.button-form(grey);
+    }
+  }
+}
