@@ -10,6 +10,6 @@ export class GetAllMenuService {
   private http = inject(HttpClient);
 
   execute(): Observable<IMenuResonse[]> {
-    return this.http.get<IMenuResonse[]>('http://localhost:8080/menus');
+    return this.http.get<IMenuResonse[]>('http://localhost:8080/menu');
   }
 }

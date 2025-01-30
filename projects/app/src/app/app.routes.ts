@@ -12,9 +12,9 @@ export const routes: Routes = [
     component: MainLayoutComponent,
     loadChildren: () => import('dishes').then((m) => m.dishesRoutes),
   },
-  // {
-  //   path: 'menus',
-  //   component: MainLayoutComponent,
-  //   loadChildren: () => import('menus').then((m) => m.menusRoutes),
-  // },
+  {
+    path: 'menus',
+    component: MainLayoutComponent,
+    loadChildren: () => import('menus').then((m) => m.menusRoutes),
+  },
 ];

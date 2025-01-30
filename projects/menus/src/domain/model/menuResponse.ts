@@ -1,4 +1,4 @@
-import { IDish } from '../../../../dishes/src/domain/model/dish';
+import { IDish } from 'dishes';
 
 export interface IMenuResonse {
   id: number;

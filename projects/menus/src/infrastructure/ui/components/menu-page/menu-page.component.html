@@ -1,0 +1,18 @@
+<section class="main" aria-label="Menu Management">
+  <lib-page-title [title]="title"></lib-page-title>
+  <lib-add [link]="addLink"></lib-add>
+  @if (menus.length > 0) {
+  <lib-bg-imgage
+    [src]="srcImage"
+    [alt]="altImage"
+    [title]="titleImage"
+  ></lib-bg-imgage>
+  <div class="main__container">
+    @for (menu of menus; track $index) {
+    <lib-menu-card [menu]="menu"></lib-menu-card>
+    }
+  </div>
+  } @else {
+  <lib-no-data-label></lib-no-data-label>
+  }
+</section>
