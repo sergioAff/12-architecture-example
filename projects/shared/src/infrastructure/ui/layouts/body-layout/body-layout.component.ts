@@ -5,6 +5,5 @@ import { RouterOutlet } from '@angular/router';
   selector: 'lib-body-layout',
   imports: [RouterOutlet],
   templateUrl: './body-layout.component.html',
-  styleUrl: './body-layout.component.scss',
 })
 export class BodyLayoutComponent {}
