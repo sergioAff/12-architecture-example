@@ -1,0 +1,18 @@
+<section class="main" aria-label="Dish Management">
+  <lib-page-title [title]="title"></lib-page-title>
+  <lib-add [link]="addLink"></lib-add>
+  @if (dishes.length>0) {
+  <lib-bg-imgage
+    [src]="srcImage"
+    [alt]="altImage"
+    [title]="titleImage"
+  ></lib-bg-imgage>
+  <div class="main__container">
+    @for (dish of dishes; track $index) {
+    <lib-dish-card [dish]="dish"></lib-dish-card>
+    }
+  </div>
+  } @else {
+  <lib-no-data-label></lib-no-data-label>
+  }
+</section>

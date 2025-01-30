@@ -14,7 +14,7 @@ export class GetAllCustomerUseCase {
   private subscriptions: Subscription = new Subscription();
 
   customers$(): Observable<ICustomer[]> {
-    return this._state.customers.customers.$() as Observable<ICustomer[]>;
+    return this._state.customers.customers.$();
   }
   initSubscription(): void {
     this.subscriptions = new Subscription();

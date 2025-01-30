@@ -7,8 +7,6 @@ import {
   NoDataLabelComponent,
 } from 'shared';
 import { ICustomer } from '../../../../domain/model/customer';
-import { Subscription } from 'rxjs';
-import { GetAllCustomerUseCase } from '../../../../application/get-all-customers.usecase';
 
 @Component({
   selector: 'lib-customer-page',
