@@ -1,8 +1,15 @@
 import { Routes } from '@angular/router';
+import { MainLayoutComponent } from 'shared';
 
 export const routes: Routes = [
   {
-    path: 'customers',
+    path: '',
+    component: MainLayoutComponent,
     loadChildren: () => import('customers').then((m) => m.customersRoutes),
   },
+  // {
+  //   path: 'menus',
+  //   component: MainLayoutComponent,
+  //   loadChildren: () => import('menus').then((m) => m.menusRoutes),
+  // },
 ];

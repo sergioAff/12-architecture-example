@@ -9,10 +9,6 @@ import { IMenuResonse } from '../../domain/model/menuResponse';
 export class EditMenuService {
   private http = inject(HttpClient);
 
-  getMenu(id: number): Observable<IMenuResonse> {
-    return this.http.get<IMenuResonse>(`http://localhost:8080/menus/${id}`);
-  }
-
   execute(id: number, menu: Partial<IMenuResonse>): Observable<IMenuResonse> {
     return this.http.put<IMenuResonse>(
       `http://localhost:8080/menus/${id}`,

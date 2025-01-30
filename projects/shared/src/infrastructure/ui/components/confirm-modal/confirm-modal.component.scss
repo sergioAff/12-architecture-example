@@ -1,0 +1,69 @@
+@use "../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as
+  variables;
+
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 10px;
+  padding-inline: 10px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__content {
+    background-color: variables.$bg-color-1;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: variables.$no-p-color;
+  }
+
+  &__message {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: variables.$secondary-color;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+
+  &__btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 1rem;
+    font-weight: bold;
+    color: variables.$secondary-color;
+
+    &---yes {
+      background-color: variables.$no-p-color;
+
+      &:hover {
+        background-color: variables.$primary-color-dark;
+      }
+    }
+
+    &---no {
+      background-color: grey;
+
+      &:hover {
+        background-color: grey;
+      }
+    }
+  }
+}

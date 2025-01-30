@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { StateFactory } from '../../../../shared/src/domain/state/state.factory';
+import { StateFactory } from '@shared/domain/state/state.factory';
 import { IMenuResonse } from '../model/menuResponse';
 import { BehaviorSubject } from 'rxjs';
 

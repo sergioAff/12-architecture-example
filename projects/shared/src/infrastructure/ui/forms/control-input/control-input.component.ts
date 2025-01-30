@@ -2,6 +2,7 @@ import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { IDish } from '../../../../../../dishes/src/domain/model/dish';
 import { EditMenuUseCase } from '../../../../../../menus/src/application/edit-menu.usecase';
+import { GetMenuByIdUseCase } from '../../../../../../menus/src/application/get-menu-by-id.usecase';
 
 @Component({
   selector: 'lib-control-input',
@@ -25,7 +26,8 @@ export class ControlInputComponent implements OnInit, OnDestroy {
   dishes: IDish[] = [];
 
   private editMenu = inject(EditMenuUseCase);
-  private getMe;
+  private getMenu = inject(GetMenuByIdUseCase);
+  private getOrder = inject(GetMenuByIdUseCase);
 
   ngOnInit(): void {
     if (this.config.name === 'dishIds' && this.menuId) {
@@ -44,14 +46,14 @@ export class ControlInputComponent implements OnInit, OnDestroy {
   }
 
   loadMenuDishes(menuId: number): void {
-    this.editMenu.execute(menuId).subscribe((menu) => {
+    this.getMenu.execute(menuId).subscribe((menu) => {
       this.dishes = menu.dishes;
       this.updateDishOptions();
     });
   }
 
   loadOrderDishes(orderId: number): void {
-    this.editOrderService.getOrder(orderId).subscribe((order) => {
+    this.getOrder.execute(orderId).subscribe((order) => {
       this.dishes = order.dishes;
       this.updateDishOptions();
     });

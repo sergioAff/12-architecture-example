@@ -1,1 +1,11 @@
-// export * from './infrastructure/ui/'
+export { MainLayoutComponent } from './infrastructure/ui/layouts/main-layout/main-layout.component';
+export { ConfirmModalComponent } from './infrastructure/ui/components/confirm-modal/confirm-modal.component';
+export { NoDataLabelComponent } from './infrastructure/ui/components/no-data-label/no-data-label.component';
+export { PageTitleComponent } from './infrastructure/ui/components/page-title/page-title.component';
+export { BgImgageComponent } from './infrastructure/ui/components/bg-imgage/bg-imgage.component';
+export { AddComponent } from './infrastructure/ui/components/add/add.component';
+export { BtnsActionsComponent } from './infrastructure/ui/components/btns-actions/btns-actions.component';
+export { FormTitleComponent } from './infrastructure/ui/components/form-title/form-title.component';
+export { LogoComponent } from './infrastructure/ui/components/logo/logo.component';
+export { StateFactory } from './domain/state/state.factory';
+export { BodyLayoutComponent } from './infrastructure/ui/layouts/body-layout/body-layout.component';

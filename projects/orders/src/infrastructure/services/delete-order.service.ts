@@ -1,9 +1,14 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DeleteOrderService {
+  private http = inject(HttpClient);
 
-  constructor() { }
+  execute(id: number): Observable<void> {
+    return this.http.delete<void>(`http://localhost:8080/orders/${id}`);
+  }
 }

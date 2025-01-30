@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { StateFactory } from '../../../../shared/src/domain/state/state.factory';
+import { StateFactory } from '@shared/domain/state/state.factory';
 import { BehaviorSubject } from 'rxjs';
 import { IDish } from '../model/dish';
 

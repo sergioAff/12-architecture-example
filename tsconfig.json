@@ -1,30 +1,16 @@
-/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
-/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
+    "rootDir": "./projects",
     "paths": {
-      "customers": [
-        "./dist/customers"
-      ],
-      "dishes": [
-        "./dist/dishes"
-      ],
-      "home": [
-        "./dist/home"
-      ],
-      "menus": [
-        "./dist/menus"
-      ],
-      "orders": [
-        "./dist/orders"
-      ],
-      "reservations": [
-        "./dist/reservations"
-      ],
-      "shared": [
-        "./dist/shared"
-      ]
+      "customers": ["./dist/customers"],
+      "dishes": ["./dist/dishes"],
+      "home": ["./dist/home"],
+      "menus": ["./dist/menus"],
+      "orders": ["./dist/orders"],
+      "reservations": ["./dist/reservations"],
+      "shared": ["./dist/shared"]
     },
     "outDir": "./dist/out-tsc",
     "strict": false,

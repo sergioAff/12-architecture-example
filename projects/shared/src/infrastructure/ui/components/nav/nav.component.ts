@@ -21,10 +21,10 @@ export class NavComponent {
   }
 
   navRoutes: INavRoute[] = [
-    { name: 'Customer', path: '/customer', icon: 'person' },
-    { name: 'Dish', path: '/dish', icon: 'restaurant' },
-    { name: 'Menu', path: '/menu', icon: 'menu_book' },
-    { name: 'Reservation', path: '/reservation', icon: 'event' },
+    { name: 'Customer', path: '/customers', icon: 'person' },
+    { name: 'Dish', path: '/dishs', icon: 'restaurant' },
+    { name: 'Menu', path: '/menus', icon: 'menu_book' },
+    { name: 'Reservation', path: '/reservations', icon: 'event' },
     { name: 'Order', path: '/order', icon: 'shopping_cart' },
   ];
 }

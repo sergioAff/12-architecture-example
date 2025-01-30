@@ -16,7 +16,7 @@ import { ControlInputComponent } from '../control-input/control-input.component'
 
 @Component({
   selector: 'lib-custom-form',
-  imports: [],
+  imports: [ControlInputComponent, ReactiveFormsModule],
   templateUrl: './custom-form.component.html',
   styleUrl: './custom-form.component.css',
 })

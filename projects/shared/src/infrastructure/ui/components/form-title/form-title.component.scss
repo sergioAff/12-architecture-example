@@ -1,0 +1,11 @@
+@use "../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as
+  variables;
+
+.main {
+  &__title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: variables.$primary-color;
+    text-align: center;
+  }
+}

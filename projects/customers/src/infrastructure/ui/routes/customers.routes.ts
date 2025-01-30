@@ -1,15 +1,20 @@
 import { Routes } from '@angular/router';
-import { MainLayoutComponent } from '../layouts/main-layout/main-layout.component';
-import { CreateCustomerComponent } from '../containers/create-customer/create-customer.component';
+import { BodyLayoutComponent } from 'shared';
+import { ListCustomersComponent } from '../containers/list-customers/list-customers.component';
+import { HomeComponent } from '../containers/home/home.component';
 
 export const customersRoutes: Routes = [
   {
-    path: 'customers',
-    component: MainLayoutComponent,
+    path: '',
+    component: BodyLayoutComponent,
     children: [
       {
-        path: 'create',
-        component: CreateCustomerComponent,
+        path: '',
+        component: HomeComponent,
+      },
+      {
+        path: 'customers',
+        component: ListCustomersComponent,
       },
     ],
   },

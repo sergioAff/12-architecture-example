@@ -1,7 +1,11 @@
+@use "../../styles/variables.scss" as variables;
+
 .layout {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  background-color: variables.$bg-color-2;
+  color: variables.$secondary-color;
 
   &__main {
     width: calc(100dvw - 190px);

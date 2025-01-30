@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { StateFactory } from '../../../../shared/src/domain/state/state.factory';
+import { StateFactory } from 'shared';
 import { ICustomer } from '../model/customer';
 import { BehaviorSubject } from 'rxjs';
 

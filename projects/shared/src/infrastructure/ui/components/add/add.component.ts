@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
   selector: 'lib-add',
   imports: [RouterLink],
   templateUrl: './add.component.html',
-  styleUrl: './add.component.css',
+  styleUrl: './add.component.scss',
 })
 export class AddComponent {
   @Input() link: string = '';
