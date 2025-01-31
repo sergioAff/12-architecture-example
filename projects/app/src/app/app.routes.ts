@@ -22,4 +22,10 @@ export const routes: Routes = [
     component: MainLayoutComponent,
     loadChildren: () => import('orders').then((m) => m.ordersRoutes),
   },
+  {
+    path: 'reservations',
+    component: MainLayoutComponent,
+    loadChildren: () =>
+      import('reservations').then((m) => m.reservationsRoutes),
+  },
 ];

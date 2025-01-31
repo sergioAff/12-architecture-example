@@ -2,5 +2,4 @@
  * Public API Surface of reservations
  */
 
-export * from './lib/reservations.service';
-export * from './lib/reservations.component';
+export * from './infrastructure/ui/routes/reservations.routes';

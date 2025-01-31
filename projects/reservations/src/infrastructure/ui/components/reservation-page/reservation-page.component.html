@@ -1,0 +1,18 @@
+<section class="main" aria-label="Menu Management">
+  <lib-page-title [title]="title"></lib-page-title>
+  <lib-add [link]="addLink"></lib-add>
+  @if (reservations.length>0) {
+  <lib-bg-imgage
+    [src]="srcImage"
+    [alt]="altImage"
+    [title]="titleImage"
+  ></lib-bg-imgage>
+  <div class="main__container">
+    @for (reservation of reservations; track $index) {
+    <lib-reservation-card [reservation]="reservation"></lib-reservation-card>
+    }
+  </div>
+  } @else {
+  <lib-no-data-label></lib-no-data-label>
+  }
+</section>
