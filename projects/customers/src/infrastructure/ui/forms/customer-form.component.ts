@@ -31,7 +31,7 @@ export class CustomerFormComponent {
       name: 'email',
       label: 'Email',
       type: 'email',
-      errorMessage: 'Email is required.',
+      errorMessage: 'Valid Email is required.',
     },
     {
       name: 'phone',

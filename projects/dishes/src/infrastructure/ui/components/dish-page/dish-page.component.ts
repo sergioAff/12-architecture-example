@@ -22,7 +22,7 @@ import { IDish } from '../../../../domain/model/dish';
 })
 export class DishPageComponent {
   title = 'Dishes';
-  addLink = '/dish/add';
+  addLink = '/dishes/add';
   srcImage = 'dish.png';
   altImage = 'Dishes';
   titleImage = 'Dishes';

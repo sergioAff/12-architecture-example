@@ -17,7 +17,7 @@ export class GetCustomerUseCase {
       .$()
       .pipe(
         map((customers: ICustomer[]) =>
-          customers.find((customer) => customer.id === id)
+          customers.find((customer: ICustomer) => customer.id === id)
         )
       );
   }

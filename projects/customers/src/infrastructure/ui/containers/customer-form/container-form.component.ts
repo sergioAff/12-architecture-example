@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ICustomer } from '../../../../domain/model/customer';
 import { CreateCustomerUseCase } from '../../../../application/create-customer.usecase';
@@ -14,7 +14,7 @@ import { CustomerFormComponent } from '../../forms/customer-form.component';
   imports: [AsyncPipe, CustomerFormComponent],
   templateUrl: './container-form.component.html',
 })
-export class ContainerFormComponent implements OnInit {
+export class ContainerFormComponent implements OnInit, OnDestroy {
   private readonly _addCustomerUseCase = inject(CreateCustomerUseCase);
   private readonly _editCustomerUseCase = inject(EditCustomerUseCase);
   private readonly _getCustomerUseCase = inject(GetCustomerUseCase);
@@ -36,6 +36,11 @@ export class ContainerFormComponent implements OnInit {
         this.loadCustomerData(this._customerId);
       }
     });
+  }
+  ngOnDestroy(): void {
+    this._getCustomerUseCase.destroySubscription();
+    this._editCustomerUseCase.destroySubscription();
+    this._getCustomerUseCase.destroySubscription();
   }
 
   loadCustomerData(id: number): void {

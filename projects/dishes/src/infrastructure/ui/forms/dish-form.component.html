@@ -1,0 +1,8 @@
+<section class="main" aria-label="Dish Management">
+  <lib-form-title [title]="dishId ? 'Edit Dish' : 'Add Dish'"></lib-form-title>
+  <lib-custom-form
+    [formConfig]="formConfig"
+    [formData]="formData"
+    [submitAction]="submitAction.bind(this)"
+  ></lib-custom-form>
+</section>
