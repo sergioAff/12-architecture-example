@@ -22,7 +22,7 @@ import { ICustomer } from '../../../../domain/model/customer';
 })
 export class CustomerPageComponent {
   title = 'Customers';
-  addLink = '/customer/add';
+  addLink = '/customers/add';
   srcImage = 'customer.png';
   altImage = 'Customers';
   titleImage = 'Customers';

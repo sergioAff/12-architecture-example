@@ -1,0 +1,10 @@
+<section class="main" aria-label="Customer Management">
+  <lib-form-title
+    [title]="customerId ? 'Edit Customer' : 'Add Customer'"
+  ></lib-form-title>
+  <lib-custom-form
+    [formConfig]="formConfig"
+    [formData]="formData"
+    [submitAction]="submitAction.bind(this)"
+  ></lib-custom-form>
+</section>

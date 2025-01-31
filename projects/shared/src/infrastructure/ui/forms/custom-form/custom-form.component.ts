@@ -18,7 +18,7 @@ import { ControlInputComponent } from '../control-input/control-input.component'
   selector: 'lib-custom-form',
   imports: [ControlInputComponent, ReactiveFormsModule],
   templateUrl: './custom-form.component.html',
-  styleUrl: './custom-form.component.css',
+  styleUrl: './custom-form.component.scss',
 })
 export class CustomFormComponent implements OnInit, OnChanges {
   @Input() formConfig!: {

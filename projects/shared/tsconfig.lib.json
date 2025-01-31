@@ -4,10 +4,6 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/lib",
-    "baseUrl": "./",
-    "paths": {
-      "@shared/*": ["src/*"]
-    },
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,

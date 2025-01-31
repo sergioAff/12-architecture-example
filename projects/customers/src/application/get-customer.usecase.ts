@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Observable, Subscription, tap } from 'rxjs';
+import { map, Observable, Subscription, tap } from 'rxjs';
 import { ICustomer } from '../domain/model/customer';
 import { GetCustomerService } from '../infrastructure/services/get-customer.service';
 import { CustomerState } from '../domain/state';
@@ -12,8 +12,14 @@ export class GetCustomerUseCase {
   private readonly _state = inject(CustomerState);
   private subscriptions: Subscription = new Subscription();
 
-  customers$(): Observable<ICustomer[]> {
-    return this._state.customers.customers.$();
+  customers$(id: number): Observable<ICustomer> {
+    return this._state.customers.customers
+      .$()
+      .pipe(
+        map((customers: ICustomer[]) =>
+          customers.find((customer) => customer.id === id)
+        )
+      );
   }
 
   initSubscription(): void {

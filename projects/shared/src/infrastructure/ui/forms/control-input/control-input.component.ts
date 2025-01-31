@@ -1,14 +1,20 @@
 import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { IDish } from '../../../../../../dishes/src/domain/model/dish';
-import { EditMenuUseCase } from '../../../../../../menus/src/application/edit-menu.usecase';
-import { GetMenuByIdUseCase } from '../../../../../../menus/src/application/get-menu-by-id.usecase';
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { IDish } from 'dishes';
+import { EditMenuUseCase } from 'menus';
+import { GetMenuByIdUseCase } from 'menus';
 
 @Component({
   selector: 'lib-control-input',
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './control-input.component.html',
-  styleUrl: './control-input.component.css',
+  styleUrl: './control-input.component.scss',
 })
 export class ControlInputComponent implements OnInit, OnDestroy {
   @Input() formGroup!: FormGroup;
