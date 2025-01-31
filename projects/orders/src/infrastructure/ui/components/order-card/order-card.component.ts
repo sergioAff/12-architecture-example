@@ -1,21 +1,21 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, inject, Input, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { DeleteDishUseCase } from '../../../../application/delete-dish.usecase';
-import { IDish } from '../../../../domain/model/dish';
+import { DeleteOrderUseCase } from '../../../../application/delete-order.usecase';
+import { IOrderResponse } from '../../../../domain/model/orderResponse';
 import { BtnsActionsComponent, ConfirmModalComponent } from 'shared';
 
 @Component({
-  selector: 'lib-dish-card',
+  selector: 'lib-order-card',
   imports: [BtnsActionsComponent, ConfirmModalComponent, CurrencyPipe],
-  templateUrl: './dish-card.component.html',
-  styleUrl: './dish-card.component.scss',
+  templateUrl: './order-card.component.html',
+  styleUrl: './order-card.component.scss',
 })
-export class DishCardComponent implements OnDestroy {
-  @Input() dish!: IDish;
+export class OrderCardComponent implements OnDestroy {
+  @Input() order!: IOrderResponse;
   isModalOpen = false;
 
-  private readonly _useCase = inject(DeleteDishUseCase);
+  private readonly _useCase = inject(DeleteOrderUseCase);
   private readonly router = inject(Router);
 
   openModal(): void {
@@ -28,15 +28,15 @@ export class DishCardComponent implements OnDestroy {
 
   confirmDelete(): void {
     this._useCase.initSubscription();
-    this._useCase.execute(this.dish.id);
+    this._useCase.execute(this.order.id);
     this.closeModal();
   }
 
-  editDish(): void {
-    this.router.navigate(['/dishes/edit', this.dish.id]);
+  editOrder(): void {
+    this.router.navigate(['/orders/edit', this.order.id]);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this._useCase.destroySubscription();
   }
 }

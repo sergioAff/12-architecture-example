@@ -1,0 +1,18 @@
+<section class="main" aria-label="Orders Management">
+  <lib-page-title [title]="title"></lib-page-title>
+  <lib-add [link]="addLink"></lib-add>
+  @if (orders.length>0) {
+  <lib-bg-imgage
+    [src]="srcImage"
+    [alt]="altImage"
+    [title]="titleImage"
+  ></lib-bg-imgage>
+  <div class="main__container">
+    @for (order of orders; track $index) {
+    <lib-order-card [order]="order"></lib-order-card>
+    }
+  </div>
+  } @else {
+  <lib-no-data-label></lib-no-data-label>
+  }
+</section>

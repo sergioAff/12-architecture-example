@@ -3,7 +3,7 @@ import { DishPageComponent } from '../../components/dish-page/dish-page.componen
 import { AsyncPipe } from '@angular/common';
 import { GetAllDishesUseCase } from '../../../../application/get-all-dishes.usecase';
 import { Observable } from 'rxjs';
-import { IDish } from 'projects/dishes/src/domain/model/dish';
+import { IDish } from '../../../../domain/model/dish';
 
 @Component({
   selector: 'lib-list-dishes',

@@ -6,7 +6,7 @@ import {
   PageTitleComponent,
 } from 'shared';
 import { DishCardComponent } from '../dish-card/dish-card.component';
-import { IDish } from 'projects/dishes/src/domain/model/dish';
+import { IDish } from '../../../../domain/model/dish';
 
 @Component({
   selector: 'lib-dish-page',

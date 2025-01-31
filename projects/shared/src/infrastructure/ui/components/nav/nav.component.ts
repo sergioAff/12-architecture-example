@@ -25,6 +25,6 @@ export class NavComponent {
     { name: 'Dish', path: '/dishes', icon: 'restaurant' },
     { name: 'Menu', path: '/menus', icon: 'menu_book' },
     { name: 'Reservation', path: '/reservations', icon: 'event' },
-    { name: 'Order', path: '/order', icon: 'shopping_cart' },
+    { name: 'Order', path: '/orders', icon: 'shopping_cart' },
   ];
 }

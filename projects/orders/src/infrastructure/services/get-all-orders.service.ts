@@ -1,9 +1,15 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { IOrderResponse } from '../../domain/model/orderResponse';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GetAllOrdersService {
+  private http = inject(HttpClient);
 
-  constructor() { }
+  execute(): Observable<IOrderResponse[]> {
+    return this.http.get<IOrderResponse[]>('http://localhost:8080/orders');
+  }
 }
