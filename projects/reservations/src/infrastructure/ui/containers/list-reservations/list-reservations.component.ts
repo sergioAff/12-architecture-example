@@ -31,8 +31,4 @@ export class ListReservationsComponent implements OnInit, OnDestroy {
       this.intervalSubscription.unsubscribe();
     }
   }
-
-  getAllReservations(): void {
-    this._useCase.execute();
-  }
 }

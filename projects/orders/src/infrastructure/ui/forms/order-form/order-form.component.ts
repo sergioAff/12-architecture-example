@@ -1,6 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { IOrderResponse } from '../../../../domain/model/orderResponse';
 import { CustomFormComponent, FormTitleComponent } from 'shared';
+import { IReservationResponse } from 'reservations';
+import { IDish } from 'dishes';
 
 @Component({
   selector: 'lib-order-form',
@@ -10,6 +12,8 @@ import { CustomFormComponent, FormTitleComponent } from 'shared';
 export class OrderFormComponent {
   @Input() formData: IOrderResponse | null;
   @Input() orderId: number | null;
+  @Input() reservations: IReservationResponse[] = [];
+  @Input() dishes: IDish[] = [];
   @Input() submitAction!: (data: IOrderResponse) => void;
 
   formConfig: {
@@ -34,4 +38,19 @@ export class OrderFormComponent {
       options: [],
     },
   ];
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['reservations']) {
+      this.formConfig[0].options = this.reservations.map((reservation) => ({
+        label: reservation.id.toString(),
+        value: reservation.id,
+      }));
+    }
+    if (changes['dishes']) {
+      this.formConfig[1].options = this.dishes.map((dish) => ({
+        label: dish.name,
+        value: dish.id,
+      }));
+    }
+  }
 }

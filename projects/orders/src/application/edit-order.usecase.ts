@@ -7,7 +7,7 @@ import { EditOrderService } from '../infrastructure/services/edit-order.service'
 @Injectable({
   providedIn: 'root',
 })
-export class CreateOrderUseCase {
+export class EditOrderUseCase {
   private readonly _service = inject(EditOrderService);
   private readonly _state = inject(OrderState);
   private subscriptions: Subscription = new Subscription();

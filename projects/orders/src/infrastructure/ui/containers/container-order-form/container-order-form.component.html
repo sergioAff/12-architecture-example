@@ -1,0 +1,7 @@
+<lib-order-form
+  [orderId]="_orderId"
+  [formData]="_formData | async"
+  [reservations]="_reservations | async"
+  [dishes]="_dishes | async"
+  [submitAction]="submitAction.bind(this)"
+></lib-order-form>
