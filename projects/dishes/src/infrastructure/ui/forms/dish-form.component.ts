@@ -8,8 +8,8 @@ import { CustomFormComponent, FormTitleComponent } from 'shared';
   templateUrl: './dish-form.component.html',
 })
 export class DishFormComponent {
-  @Input() dishId: number | null = null;
-  @Input() formData: IDish | null = null;
+  @Input() dishId: number | null;
+  @Input() formData: IDish | null;
   @Input() submitAction!: (data: IDish) => void;
 
   formConfig = [

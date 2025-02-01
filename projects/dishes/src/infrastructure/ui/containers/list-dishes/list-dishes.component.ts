@@ -2,8 +2,9 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { DishPageComponent } from '../../components/dish-page/dish-page.component';
 import { AsyncPipe } from '@angular/common';
 import { GetAllDishesUseCase } from '../../../../application/get-all-dishes.usecase';
-import { Observable } from 'rxjs';
+import { Observable, Subscription, interval } from 'rxjs';
 import { IDish } from '../../../../domain/model/dish';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'lib-list-dishes',
@@ -13,17 +14,21 @@ import { IDish } from '../../../../domain/model/dish';
 export class ListDishesComponent implements OnInit, OnDestroy {
   private readonly _useCase = inject(GetAllDishesUseCase);
   public dishes$: Observable<IDish[]>;
+  private intervalSubscription: Subscription;
 
   ngOnInit(): void {
     this._useCase.initSubscription();
-    this.getAllDishes();
     this.dishes$ = this._useCase.dishes$();
+
+    this.intervalSubscription = interval(500)
+      .pipe(switchMap(async () => this._useCase.execute()))
+      .subscribe();
   }
 
-  getAllDishes(): void {
-    this._useCase.execute();
-  }
   ngOnDestroy(): void {
     this._useCase.destroySubscription();
+    if (this.intervalSubscription) {
+      this.intervalSubscription.unsubscribe();
+    }
   }
 }

@@ -69,10 +69,16 @@ export class ContainerDishFormComponent implements OnInit, OnDestroy {
   submitAction(data: IDish): void {
     if (this._dishId) {
       this._editDishUseCase.execute(this._dishId, data);
+      this.reloadAndNavigate();
     } else {
       this._addDishUseCase.execute(data);
+      this.reloadAndNavigate();
     }
-    this._router.navigate(['/dishes']);
-    window.location.reload();
+  }
+
+  private reloadAndNavigate(): void {
+    this._router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this._router.navigate(['/dishes']);
+    });
   }
 }

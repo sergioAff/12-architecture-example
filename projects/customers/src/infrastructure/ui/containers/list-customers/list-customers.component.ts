@@ -1,10 +1,10 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-
 import { CustomerPageComponent } from '../../components/customer-page/customer-page.component';
 import { GetAllCustomerUseCase } from '../../../../application/get-all-customers.usecase';
-import { Observable } from 'rxjs';
+import { Observable, Subscription, interval } from 'rxjs';
 import { ICustomer } from '../../../../domain/model/customer';
 import { AsyncPipe } from '@angular/common';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'lib-list-customers',
@@ -14,18 +14,21 @@ import { AsyncPipe } from '@angular/common';
 export class ListCustomersComponent implements OnInit, OnDestroy {
   private readonly _useCase = inject(GetAllCustomerUseCase);
   public customers$: Observable<ICustomer[]>;
+  private intervalSubscription: Subscription;
 
   ngOnInit(): void {
     this._useCase.initSubscription();
-    this.getAllCustomers();
     this.customers$ = this._useCase.customers$();
+
+    this.intervalSubscription = interval(500)
+      .pipe(switchMap(async () => this._useCase.execute()))
+      .subscribe();
   }
 
-  getAllCustomers(): void {
-    this._useCase.execute();
-  }
-
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this._useCase.destroySubscription();
+    if (this.intervalSubscription) {
+      this.intervalSubscription.unsubscribe();
+    }
   }
 }

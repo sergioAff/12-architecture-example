@@ -11,7 +11,7 @@ export class EditMenuService {
 
   execute(id: number, menu: Partial<IMenuResonse>): Observable<IMenuResonse> {
     return this.http.put<IMenuResonse>(
-      `http://localhost:8080/menus/${id}`,
+      `http://localhost:8080/menu/${id}`,
       menu
     );
   }

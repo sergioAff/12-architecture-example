@@ -7,7 +7,6 @@ import { ICustomer } from '../../../domain/model/customer';
   selector: 'lib-customer-form',
   imports: [FormTitleComponent, CustomFormComponent],
   templateUrl: './customer-form.component.html',
-  styleUrl: './customer-form.component.scss',
 })
 export class CustomerFormComponent {
   @Input() customerId: number | null = null;

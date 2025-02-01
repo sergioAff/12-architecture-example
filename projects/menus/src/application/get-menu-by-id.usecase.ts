@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { GetMenuByIdService } from '../infrastructure/services/get-menu-by-id.service';
 import { MenuState } from '../domain/state';
-import { Observable, tap } from 'rxjs';
+import { map, Observable, Subscription, tap } from 'rxjs';
 import { IMenuResonse } from '../domain/model/menuResponse';
 
 @Injectable({
@@ -10,9 +10,24 @@ import { IMenuResonse } from '../domain/model/menuResponse';
 export class GetMenuByIdUseCase {
   private readonly _service = inject(GetMenuByIdService);
   private readonly _state = inject(MenuState);
+  private subscriptions: Subscription = new Subscription();
 
-  menu$(): Observable<IMenuResonse[]> {
-    return this._state.menus.menus.$();
+  menu$(id: number): Observable<IMenuResonse> {
+    return this._state.menus.menus
+      .$()
+      .pipe(
+        map((menus: IMenuResonse[]) =>
+          menus.find((menu: IMenuResonse) => menu.id === id)
+        )
+      );
+  }
+
+  initSubscription(): void {
+    this.subscriptions = new Subscription();
+  }
+
+  destroySubscription(): void {
+    this.subscriptions.unsubscribe();
   }
 
   execute(id: number): Observable<IMenuResonse> {

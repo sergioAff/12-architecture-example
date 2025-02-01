@@ -10,6 +10,6 @@ export class GetMenuByIdService {
   private http = inject(HttpClient);
 
   execute(id: number): Observable<IMenuResonse> {
-    return this.http.get<IMenuResonse>(`http://localhost:8080/menus/${id}`);
+    return this.http.get<IMenuResonse>(`http://localhost:8080/menu/${id}`);
   }
 }

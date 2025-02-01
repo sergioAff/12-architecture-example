@@ -1,0 +1,9 @@
+<section class="main" aria-label="Menu Management">
+  <lib-form-title [title]="menuId ? 'Edit Menu' : 'Add Menu'"></lib-form-title>
+  <lib-custom-form
+    [formConfig]="formConfig"
+    [formData]="formData"
+    [submitAction]="submitAction.bind(this)"
+    [menuId]="menuId || 0"
+  ></lib-custom-form>
+</section>

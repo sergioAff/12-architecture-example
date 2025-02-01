@@ -21,7 +21,7 @@ import { IMenuResonse } from '../../../../domain/model/menuResponse';
 export class MenuPageComponent {
   @Input() menus: IMenuResonse[] = [];
   title = 'Menus ';
-  addLink = '/menu/add';
+  addLink = '/menus/add';
   srcImage = 'hamburguesa.png';
   altImage = 'hamburguer';
   titleImage = 'Menus';

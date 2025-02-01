@@ -10,7 +10,7 @@ export class CreateMenuService {
   private http = inject(HttpClient);
 
   execute(menu: Partial<IMenuResonse>): Observable<IMenuResonse> {
-    return this.http.post<IMenuResonse>('http://localhost:8080/menus', menu, {
+    return this.http.post<IMenuResonse>('http://localhost:8080/menu', menu, {
       headers: this.getHeaders(),
     });
   }
