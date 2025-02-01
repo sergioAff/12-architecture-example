@@ -1,30 +1,38 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ReservationPageComponent } from '../../components/reservation-page/reservation-page.component';
 import { AsyncPipe } from '@angular/common';
 import { GetALlReservationUseCase } from '../../../../application/get-all-reservation.usecase';
-import { Observable } from 'rxjs';
+import { Observable, Subscription, interval } from 'rxjs';
 import { IReservationResponse } from '../../../../domain/model/reservation.interface';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'lib-list-reservations',
   imports: [ReservationPageComponent, AsyncPipe],
   templateUrl: './list-reservations.component.html',
 })
-export class ListReservationsComponent {
+export class ListReservationsComponent implements OnInit, OnDestroy {
   public readonly _useCase = inject(GetALlReservationUseCase);
   public reservations$: Observable<IReservationResponse[]>;
+  private intervalSubscription: Subscription;
 
   ngOnInit(): void {
     this._useCase.initSubscription();
-    this.getAllReservations();
     this.reservations$ = this._useCase.reservation$();
-  }
 
-  getAllReservations(): void {
-    this._useCase.execute();
+    this.intervalSubscription = interval(500)
+      .pipe(switchMap(async () => this._useCase.execute()))
+      .subscribe();
   }
 
   ngOnDestroy(): void {
     this._useCase.destroySubscription();
+    if (this.intervalSubscription) {
+      this.intervalSubscription.unsubscribe();
+    }
+  }
+
+  getAllReservations(): void {
+    this._useCase.execute();
   }
 }

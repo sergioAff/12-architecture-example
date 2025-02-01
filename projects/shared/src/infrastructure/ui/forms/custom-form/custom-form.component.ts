@@ -28,6 +28,8 @@ export class CustomFormComponent implements OnInit, OnChanges {
     errorMessage?: string;
     options?: { label: string; value: any }[];
   }[];
+  @Input() menuId!: number;
+  @Input() orderId!: number;
   @Input() formData!: any;
   @Input() submitAction!: (data: any) => void;
   formGroup!: FormGroup;

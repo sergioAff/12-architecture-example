@@ -44,7 +44,6 @@ export class CreateOrderService {
     } else {
       errorMessage = `Backend returned code ${error.status}, body was: ${error.error}`;
     }
-    console.error(errorMessage);
     return throwError(errorMessage);
   }
 }

@@ -1,0 +1,10 @@
+<section class="main" aria-label="Reservation Management">
+  <lib-form-title
+    [title]="reservationId ? 'Edit Reservation' : 'Add Reservation'"
+  ></lib-form-title>
+  <lib-custom-form
+    [formConfig]="formConfig"
+    [formData]="formData"
+    [submitAction]="submitAction.bind(this)"
+  ></lib-custom-form>
+</section>

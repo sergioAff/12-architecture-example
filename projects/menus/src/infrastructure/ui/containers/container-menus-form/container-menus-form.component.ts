@@ -59,7 +59,6 @@ export class ContainerMenusFormComponent implements OnInit, OnDestroy {
   loadDishes(): void {
     this._getDishesUseCase.execute();
     this._dishes = this._getDishesUseCase.dishes$();
-    console.log(this._dishes);
   }
 
   updateFormData(): void {

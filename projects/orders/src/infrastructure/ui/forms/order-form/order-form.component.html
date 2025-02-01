@@ -1,0 +1,11 @@
+<section class="main" aria-label="Order Management">
+  <lib-form-title
+    [title]="orderId ? 'Edit Order' : 'Add Order'"
+  ></lib-form-title>
+  <lib-custom-form
+    [formConfig]="formConfig"
+    [formData]="formData"
+    [submitAction]="submitAction.bind(this)"
+    [orderId]="orderId || 0"
+  ></lib-custom-form>
+</section>
