@@ -4,3 +4,4 @@
 export * from './infrastructure/ui/routes/menus.routes';
 export { GetMenuByIdUseCase } from './application/get-menu-by-id.usecase';
 export { EditMenuUseCase } from './application/edit-menu.usecase';
+export type { IMenuResonse } from './domain/model/menuResponse';

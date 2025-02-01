@@ -9,6 +9,9 @@ import {
 import { IDish } from 'dishes';
 import { EditMenuUseCase } from 'menus';
 import { GetMenuByIdUseCase } from 'menus';
+import { GetOrderUseCase } from 'orders';
+import { IMenuResonse } from 'menus';
+import { IOrderResponse } from 'orders';
 
 @Component({
   selector: 'lib-control-input',
@@ -33,7 +36,7 @@ export class ControlInputComponent implements OnInit, OnDestroy {
 
   private editMenu = inject(EditMenuUseCase);
   private getMenu = inject(GetMenuByIdUseCase);
-  private getOrder = inject(GetMenuByIdUseCase);
+  private getOrder = inject(GetOrderUseCase);
 
   ngOnInit(): void {
     if (this.config.name === 'dishIds' && this.menuId) {
@@ -52,17 +55,21 @@ export class ControlInputComponent implements OnInit, OnDestroy {
   }
 
   loadMenuDishes(menuId: number): void {
-    this.getMenu.execute(menuId).subscribe((menu) => {
+    this.getMenu.execute(menuId);
+    this.getMenu.menu$(menuId).subscribe((menu: IMenuResonse | undefined) => {
       this.dishes = menu.dishes;
       this.updateDishOptions();
     });
   }
 
   loadOrderDishes(orderId: number): void {
-    this.getOrder.execute(orderId).subscribe((order) => {
-      this.dishes = order.dishes;
-      this.updateDishOptions();
-    });
+    this.getOrder.execute(orderId);
+    this.getOrder
+      .orders$(orderId)
+      .subscribe((order: IOrderResponse | undefined) => {
+        this.dishes = order.dishes;
+        this.updateDishOptions();
+      });
   }
 
   updateDishOptions(): void {

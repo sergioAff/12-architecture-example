@@ -30,15 +30,20 @@ export class GetMenuByIdUseCase {
     this.subscriptions.unsubscribe();
   }
 
-  execute(id: number): Observable<IMenuResonse> {
-    return this._service.execute(id).pipe(
-      tap((updateMenu: IMenuResonse) => {
-        const currentMenus = this._state.menus.menus.snapshot();
-        const updatedMenus = currentMenus.map((m) =>
-          m.id === id ? updateMenu : m
-        );
-        this._state.menus.menus.set(updatedMenus);
-      })
+  execute(id: number): void {
+    this.subscriptions.add(
+      this._service
+        .execute(id)
+        .pipe(
+          tap((updatedMenu: IMenuResonse) => {
+            const currentMenus = this._state.menus.menus.snapshot();
+            const updatedMenus = currentMenus.map((menu) =>
+              menu.id === id ? updatedMenu : menu
+            );
+            this._state.menus.menus.set(updatedMenus);
+          })
+        )
+        .subscribe()
     );
   }
 }

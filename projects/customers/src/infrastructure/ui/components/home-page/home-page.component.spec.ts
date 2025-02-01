@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HomePageComponent } from './home-page.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { By } from '@angular/platform-browser';
+import { RouterLink } from '@angular/router';
 
 describe('HomePageComponent', () => {
   let component: HomePageComponent;
@@ -8,16 +10,60 @@ describe('HomePageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomePageComponent]
-    })
-    .compileComponents();
+      imports: [
+        RouterTestingModule,
+        HomePageComponent, // Importa el componente standalone aquí
+      ],
+      // Declaraciones ya no es necesario aquí
+    }).compileComponents();
+  });
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(HomePageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should render the main container with its content', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    // Verifica que exista el contenedor principal
+    const mainContainer = compiled.querySelector('.main__container');
+    expect(mainContainer).toBeTruthy();
+
+    // Verifica la existencia de la imagen con la clase "main__logo"
+    const logo = compiled.querySelector('.main__logo') as HTMLImageElement;
+    expect(logo).toBeTruthy();
+    expect(logo.src).toContain('logo.png');
+
+    // Verifica la existencia del título principal
+    const title = compiled.querySelector('.main__title');
+    expect(title).toBeTruthy();
+    expect(title?.textContent).toContain('Welcome to our Restaurant');
+
+    // Verifica la existencia de la descripción
+    const description = compiled.querySelector('.main__description');
+    expect(description).toBeTruthy();
+    expect(description?.textContent).toContain(
+      'Efficient and user-friendly restaurant management system'
+    );
+  });
+
+  it('should have a "Get Started" link with routerLink pointing to "/customers"', () => {
+    // Se utiliza el DebugElement para obtener el enlace y verificar la directiva RouterLink
+    const linkDe = fixture.debugElement.query(By.css('.main__start'));
+    expect(linkDe).toBeTruthy();
+
+    // Se extrae el valor de la propiedad "routerLink"
+    const routerLinkInstance = linkDe.injector.get<any>(RouterLink, null);
+    // En algunos casos, se puede acceder a la propiedad reflectada de Angular:
+    const routerLinkAttr = linkDe.attributes['ng-reflect-router-link'];
+
+    // Verifica que el enlace tenga el valor correcto
+    expect(routerLinkAttr).toBe('/customers');
   });
 });

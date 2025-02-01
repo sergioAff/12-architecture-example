@@ -4,9 +4,7 @@ import { OrderState } from '../domain/state';
 import { map, Observable, Subscription, tap } from 'rxjs';
 import { IOrderResponse } from '../domain/model/orderResponse';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' }) // <-- Esto es crucial
 export class GetOrderUseCase {
   private readonly _service = inject(GetOrderByIdService);
   private readonly _state = inject(OrderState);
