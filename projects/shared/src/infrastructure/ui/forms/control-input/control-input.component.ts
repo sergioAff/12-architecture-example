@@ -9,9 +9,9 @@ import {
 import { IDish } from 'dishes';
 import { EditMenuUseCase } from 'menus';
 import { GetMenuByIdUseCase } from 'menus';
-import { GetOrderUseCase } from 'orders';
+import { GetOrderUseCase } from '../../../../application/get-order.usecase';
 import { IMenuResonse } from 'menus';
-import { IOrderResponse } from 'orders';
+import { IOrderResponse } from '../../../../domain/model/orderResponse';
 
 @Component({
   selector: 'lib-control-input',

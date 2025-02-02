@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { StateFactory } from 'shared';
+import { StateFactory } from './state.factory';
 import { IOrderResponse } from '../model/orderResponse';
 import { BehaviorSubject } from 'rxjs';
 

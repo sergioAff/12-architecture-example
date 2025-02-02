@@ -10,3 +10,7 @@ export { LogoComponent } from './infrastructure/ui/components/logo/logo.componen
 export { StateFactory } from './domain/state/state.factory';
 export { BodyLayoutComponent } from './infrastructure/ui/layouts/body-layout/body-layout.component';
 export { CustomFormComponent } from './infrastructure/ui/forms/custom-form/custom-form.component';
+export { OrdersState } from './domain/state/orders.state';
+export { OrderState } from './domain/state/index';
+export { GetOrderByIdService } from './infrastructure/services/get-order-by-id.service';
+export { GetOrderUseCase } from './application/get-order.usecase';

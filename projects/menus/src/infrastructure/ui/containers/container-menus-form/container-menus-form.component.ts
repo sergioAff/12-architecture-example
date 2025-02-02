@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { MenuFormComponent } from '../../forms/menu-form/menu-form.component';
 import { AsyncPipe } from '@angular/common';
 import { CreateMenuUseCase } from '../../../../application/create-menu.usecase';
@@ -16,7 +16,9 @@ import { GetDishesForMenuUseCase } from '../../../../application/get-dishes-for-
   imports: [MenuFormComponent, AsyncPipe],
   templateUrl: './container-menus-form.component.html',
 })
-export class ContainerMenusFormComponent implements OnInit, OnDestroy {
+export class ContainerMenusFormComponent
+  implements OnInit, OnDestroy, OnChanges
+{
   private readonly _addMenuUseCase = inject(CreateMenuUseCase);
   private readonly _editMenuUseCase = inject(EditMenuUseCase);
   public readonly _getMenuUseCase = inject(GetMenuByIdUseCase);
@@ -50,9 +52,16 @@ export class ContainerMenusFormComponent implements OnInit, OnDestroy {
     this._getDishesUseCase.destroySubscription();
   }
 
+  ngOnChanges(): void {
+    this.updateFormData();
+    this.loadDishes();
+    this.loadMenuData(this._menuId);
+  }
+
   loadMenuData(id: number): void {
     this._getMenuUseCase.execute(id);
     this._formData = this._getMenuUseCase.menu$(id);
+    this.loadDishes();
     this.updateFormData();
   }
 

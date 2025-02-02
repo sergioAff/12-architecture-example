@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { OrderState } from '../domain/state';
+import { OrdersState } from 'shared';
 import { Observable, Subscription, tap } from 'rxjs';
 import { IOrderResponse } from '../domain/model/orderResponse';
 import { EditOrderService } from '../infrastructure/services/edit-order.service';
@@ -9,11 +9,11 @@ import { EditOrderService } from '../infrastructure/services/edit-order.service'
 })
 export class EditOrderUseCase {
   private readonly _service = inject(EditOrderService);
-  private readonly _state = inject(OrderState);
+  private readonly _state = inject(OrdersState);
   private subscriptions: Subscription = new Subscription();
 
   orders$(): Observable<IOrderResponse[]> {
-    return this._state.orders.orders.$();
+    return this._state.store().orders.$();
   }
 
   initSubscription(): void {
@@ -30,14 +30,20 @@ export class EditOrderUseCase {
         .execute(id, order)
         .pipe(
           tap((updatedOrder: IOrderResponse) => {
-            const currentOrders = this._state.orders.orders.snapshot();
+            alert('Order updated successfully');
+            const currentOrders = this._state.store().orders.snapshot();
             const updatedOrders = currentOrders.map((c) =>
               c.id === id ? { ...c, ...updatedOrder } : c
             );
-            this._state.orders.orders.set(updatedOrders);
+            this._state.store().orders.set(updatedOrders);
+            alert('Order updated successfully');
           })
         )
-        .subscribe()
+        .subscribe({
+          error: (err) => {
+            console.error('Error updating order:', err);
+          },
+        })
     );
   }
 }

@@ -13,8 +13,9 @@ export class EditOrderService {
     id: number,
     order: Partial<IOrderResponse>
   ): Observable<IOrderResponse> {
+    console.log(order);
     return this.http.put<IOrderResponse>(
-      `http://localhost:8080/order/${id}`,
+      `http://localhost:8080/orders/${id}`,
       order
     );
   }

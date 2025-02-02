@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { DeleteOrderService } from '../infrastructure/services/delete-order.service';
-import { OrderState } from '../domain/state';
+import { OrderState } from 'shared';
 import { Observable, Subscription, tap } from 'rxjs';
 import { IOrderResponse } from '../domain/model/orderResponse';
 

@@ -1,11 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { CreateOrderUseCase } from '../../../../application/create-order.usecase';
 import { EditOrderUseCase } from '../../../../application/edit-order.usecase';
-import { GetOrderUseCase } from '../../../../application/get-order.usecase';
+import { GetOrderUseCase } from 'shared';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IOrderResponse } from '../../../../domain/model/orderResponse';
-import { CustomFormComponent } from 'shared';
 import { Observable, of } from 'rxjs';
 import { GetALlReservationUseCase, IReservationResponse } from 'reservations';
 import { OrderFormComponent } from '../../forms/order-form/order-form.component';
@@ -16,11 +15,11 @@ import { GetAllDishesUseCase, IDish } from 'dishes';
   imports: [OrderFormComponent, AsyncPipe],
   templateUrl: './container-order-form.component.html',
 })
-export class ContainerOrderFormComponent {
+export class ContainerOrderFormComponent implements OnInit, OnDestroy {
   private readonly _addOrderUseCase = inject(CreateOrderUseCase);
   private readonly _editOrderUseCase = inject(EditOrderUseCase);
-  public readonly _getOrderUseCase = inject(GetOrderUseCase);
-  private readonly _getAllReservationUseCase = inject(GetALlReservationUseCase);
+  private readonly _getOrderByIdUseCase = inject(GetOrderUseCase);
+  private readonly _getReservationsUseCase = inject(GetALlReservationUseCase);
   private readonly _getDishesUseCase = inject(GetAllDishesUseCase);
   private readonly _router = inject(Router);
   private readonly _route = inject(ActivatedRoute);
@@ -33,9 +32,9 @@ export class ContainerOrderFormComponent {
   ngOnInit(): void {
     this._addOrderUseCase.initSubscription();
     this._editOrderUseCase.initSubscription();
-    this._getOrderUseCase.initSubscription();
+    this._getOrderByIdUseCase.initSubscription();
+    this._getReservationsUseCase.initSubscription();
     this._getDishesUseCase.initSubscription();
-    this._getAllReservationUseCase.initSubscription();
 
     this._route.paramMap.subscribe((params) => {
       const id = params.get('id');
@@ -44,48 +43,32 @@ export class ContainerOrderFormComponent {
         this.loadOrderData(this._orderId);
       }
     });
+
     this.loadReservations();
     this.loadDishes();
   }
 
   ngOnDestroy(): void {
-    this._getOrderUseCase.destroySubscription();
+    this._addOrderUseCase.destroySubscription();
     this._editOrderUseCase.destroySubscription();
+    this._getOrderByIdUseCase.destroySubscription();
+    this._getReservationsUseCase.destroySubscription();
     this._getDishesUseCase.destroySubscription();
-    this._getOrderUseCase.destroySubscription();
-    this._getAllReservationUseCase.destroySubscription();
   }
 
   loadOrderData(id: number): void {
-    this._getOrderUseCase.execute(id);
-    this._formData = this._getOrderUseCase.orders$(id);
-    this.updateFormData();
+    this._getOrderByIdUseCase.execute(id);
+    this._formData = this._getOrderByIdUseCase.orders$(id);
   }
 
   loadReservations(): void {
-    this._getAllReservationUseCase.execute();
-    this._reservations = this._getAllReservationUseCase.reservation$();
+    this._getReservationsUseCase.execute();
+    this._reservations = this._getReservationsUseCase.reservation$();
   }
 
   loadDishes(): void {
     this._getDishesUseCase.execute();
     this._dishes = this._getDishesUseCase.dishes$();
-  }
-
-  updateFormData(): void {
-    if (this._formData) {
-      const formComponent = this.getFormComponent();
-      if (formComponent) {
-        formComponent.formGroup.patchValue(this._formData);
-      }
-    }
-  }
-
-  getFormComponent(): CustomFormComponent | null {
-    const formComponent = document.querySelector(
-      'lib-order-form'
-    ) as unknown as CustomFormComponent;
-    return formComponent ? formComponent : null;
   }
 
   submitAction(data: IOrderResponse): void {

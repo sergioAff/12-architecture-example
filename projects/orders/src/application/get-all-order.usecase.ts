@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { GetAllOrdersService } from '../infrastructure/services/get-all-orders.service';
-import { OrderState } from '../domain/state';
+import { OrderState } from 'shared';
 import { Observable, Subscription, tap } from 'rxjs';
 import { IOrderResponse } from '../domain/model/orderResponse';
 
