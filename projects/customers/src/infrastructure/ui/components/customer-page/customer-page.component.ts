@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CustomerCardComponent } from '../../components/customer-card/customer-card.component';
 import {
   PageTitleComponent,
@@ -28,4 +28,5 @@ export class CustomerPageComponent {
   titleImage = 'Customers';
 
   @Input() customers: ICustomer[] = [];
+  @Output() deleteCustomer: EventEmitter<number> = new EventEmitter<number>();
 }

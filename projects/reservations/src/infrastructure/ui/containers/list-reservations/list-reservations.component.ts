@@ -5,6 +5,7 @@ import { GetALlReservationUseCase } from '../../../../application/get-all-reserv
 import { Observable, Subscription, interval } from 'rxjs';
 import { IReservationResponse } from '../../../../domain/model/reservation.interface';
 import { switchMap } from 'rxjs/operators';
+import { DeleteReservationUseCase } from '../../../../application/delete-reservation.usecase';
 
 @Component({
   selector: 'lib-list-reservations',
@@ -13,6 +14,7 @@ import { switchMap } from 'rxjs/operators';
 })
 export class ListReservationsComponent implements OnInit, OnDestroy {
   public readonly _useCase = inject(GetALlReservationUseCase);
+  public readonly _useCaseDelete = inject(DeleteReservationUseCase);
   public reservations$: Observable<IReservationResponse[]>;
   private intervalSubscription: Subscription;
 
@@ -23,6 +25,12 @@ export class ListReservationsComponent implements OnInit, OnDestroy {
     this.intervalSubscription = interval(100)
       .pipe(switchMap(async () => this._useCase.execute()))
       .subscribe();
+  }
+
+  onRequestDelete(reservationId: number): void {
+    this._useCaseDelete.initSubscription();
+    this._useCaseDelete.execute(reservationId);
+    this._useCaseDelete.destroySubscription();
   }
 
   ngOnDestroy(): void {

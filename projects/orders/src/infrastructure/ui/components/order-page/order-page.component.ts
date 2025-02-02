@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   AddComponent,
   BgImgageComponent,
@@ -28,4 +28,5 @@ export class OrderPageComponent {
   titleImage = 'Orders';
 
   @Input() orders: IOrderResponse[] = [];
+  @Output() deleteOrder: EventEmitter<number> = new EventEmitter<number>();
 }

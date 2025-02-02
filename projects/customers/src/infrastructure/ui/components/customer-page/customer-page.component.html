@@ -9,7 +9,10 @@
   ></lib-bg-imgage>
   <div class="main__container">
     @for (customer of customers; track $index) {
-    <lib-customer-card [customer]="customer"></lib-customer-card>
+    <lib-customer-card
+      (deleteCustomer)="deleteCustomer.emit(customer.id)"
+      [customer]="customer"
+    ></lib-customer-card>
     }
   </div>
   } @else {

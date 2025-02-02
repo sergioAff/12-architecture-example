@@ -9,7 +9,10 @@
   ></lib-bg-imgage>
   <div class="main__container">
     @for (menu of menus; track $index) {
-    <lib-menu-card [menu]="menu"></lib-menu-card>
+    <lib-menu-card
+      [menu]="menu"
+      (deleteMenu)="deleteMenu.emit(menu.id)"
+    ></lib-menu-card>
     }
   </div>
   } @else {

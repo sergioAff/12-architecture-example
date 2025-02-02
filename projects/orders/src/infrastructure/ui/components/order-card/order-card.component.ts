@@ -1,7 +1,6 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, inject, Input, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { DeleteOrderUseCase } from '../../../../application/delete-order.usecase';
 import { IOrderResponse } from '../../../../domain/model/orderResponse';
 import { BtnsActionsComponent, ConfirmModalComponent } from 'shared';
 
@@ -11,11 +10,10 @@ import { BtnsActionsComponent, ConfirmModalComponent } from 'shared';
   templateUrl: './order-card.component.html',
   styleUrl: './order-card.component.scss',
 })
-export class OrderCardComponent implements OnDestroy {
+export class OrderCardComponent {
   @Input() order!: IOrderResponse;
   isModalOpen = false;
-
-  private readonly _useCase = inject(DeleteOrderUseCase);
+  @Output() deleteOrder: EventEmitter<number> = new EventEmitter<number>();
   private readonly router = inject(Router);
 
   openModal(): void {
@@ -27,16 +25,10 @@ export class OrderCardComponent implements OnDestroy {
   }
 
   confirmDelete(): void {
-    this._useCase.initSubscription();
-    this._useCase.execute(this.order.id);
-    this.closeModal();
+    this.deleteOrder.emit();
   }
 
   editOrder(): void {
     this.router.navigate(['/orders/edit', this.order.id]);
-  }
-
-  ngOnDestroy(): void {
-    this._useCase.destroySubscription();
   }
 }

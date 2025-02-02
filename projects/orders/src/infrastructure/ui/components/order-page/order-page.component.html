@@ -9,7 +9,10 @@
   ></lib-bg-imgage>
   <div class="main__container">
     @for (order of orders; track $index) {
-    <lib-order-card [order]="order"></lib-order-card>
+    <lib-order-card
+      [order]="order"
+      (deleteOrder)="deleteOrder.emit(order.id)"
+    ></lib-order-card>
     }
   </div>
   } @else {

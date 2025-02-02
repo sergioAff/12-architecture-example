@@ -9,7 +9,10 @@
   ></lib-bg-imgage>
   <div class="main__container">
     @for (reservation of reservations; track $index) {
-    <lib-reservation-card [reservation]="reservation"></lib-reservation-card>
+    <lib-reservation-card
+      [reservation]="reservation"
+      (deleteReservation)="deleteReservation.emit(reservation.id)"
+    ></lib-reservation-card>
     }
   </div>
   } @else {

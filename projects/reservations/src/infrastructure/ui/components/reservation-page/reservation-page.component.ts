@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   AddComponent,
   BgImgageComponent,
@@ -28,4 +28,6 @@ export class ReservationPageComponent {
   titleImage = 'Reservations';
 
   @Input() reservations: IReservationResponse[] = [];
+  @Output() deleteReservation: EventEmitter<number> =
+    new EventEmitter<number>();
 }

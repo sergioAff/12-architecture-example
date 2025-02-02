@@ -9,7 +9,10 @@
   ></lib-bg-imgage>
   <div class="main__container">
     @for (dish of dishes; track $index) {
-    <lib-dish-card [dish]="dish"></lib-dish-card>
+    <lib-dish-card
+      [dish]="dish"
+      (deleteDish)="deleteDish.emit(dish.id)"
+    ></lib-dish-card>
     }
   </div>
   } @else {

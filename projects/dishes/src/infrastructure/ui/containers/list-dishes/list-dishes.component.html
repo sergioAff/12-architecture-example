@@ -1,1 +1,4 @@
-<lib-dish-page [dishes]="dishes$ | async"></lib-dish-page>
+<lib-dish-page
+  [dishes]="dishes$ | async"
+  (deleteDish)="onRequestDelete($event)"
+></lib-dish-page>

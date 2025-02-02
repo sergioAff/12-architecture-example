@@ -4,6 +4,7 @@ import { GetAllMenuUseCase } from '../../../../application/get-all-menu.usecase'
 import { interval, Observable, Subscription, switchMap } from 'rxjs';
 import { IMenuResonse } from '../../../../domain/model/menuResponse';
 import { AsyncPipe } from '@angular/common';
+import { DeleteMenuUseCase } from '../../../../application/delete-menu.usecase';
 
 @Component({
   selector: 'lib-list-menus',
@@ -12,6 +13,7 @@ import { AsyncPipe } from '@angular/common';
 })
 export class ListMenusComponent implements OnInit, OnDestroy {
   private readonly _useCase = inject(GetAllMenuUseCase);
+  private readonly _useCaseDelete = inject(DeleteMenuUseCase);
   public menus$: Observable<IMenuResonse[]>;
   private intervalSubscription: Subscription;
 
@@ -21,6 +23,12 @@ export class ListMenusComponent implements OnInit, OnDestroy {
     this.intervalSubscription = interval(100)
       .pipe(switchMap(async () => this._useCase.execute()))
       .subscribe();
+  }
+
+  onRequestDelete(menuId: number): void {
+    this._useCaseDelete.initSubscription();
+    this._useCaseDelete.execute(menuId);
+    this._useCaseDelete.destroySubscription();
   }
 
   ngOnDestroy(): void {

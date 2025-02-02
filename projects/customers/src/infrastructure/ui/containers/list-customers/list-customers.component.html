@@ -1,1 +1,4 @@
-<lib-customer-page [customers]="customers$ | async"></lib-customer-page>
+<lib-customer-page
+  [customers]="customers$ | async"
+  (deleteCustomer)="onRequestDelete($event)"
+></lib-customer-page>

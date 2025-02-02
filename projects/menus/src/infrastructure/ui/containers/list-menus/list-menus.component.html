@@ -1,1 +1,4 @@
-<lib-menu-page [menus]="menus$ | async"></lib-menu-page>
+<lib-menu-page
+  [menus]="menus$ | async"
+  (deleteMenu)="onRequestDelete($event)"
+></lib-menu-page>

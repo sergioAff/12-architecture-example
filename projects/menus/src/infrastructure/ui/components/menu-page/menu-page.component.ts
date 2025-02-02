@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PageTitleComponent } from 'shared';
 import { AddComponent } from 'shared';
 import { BgImgageComponent } from 'shared';
@@ -25,4 +25,6 @@ export class MenuPageComponent {
   srcImage = 'hamburguesa.png';
   altImage = 'hamburguer';
   titleImage = 'Menus';
+
+  @Output() deleteMenu: EventEmitter<number> = new EventEmitter<number>();
 }

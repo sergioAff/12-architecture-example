@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { DeleteReservationUseCase } from '../../../../application/delete-reservation.usecase';
 import { IReservationResponse } from '../../../../domain/model/reservation.interface';
@@ -13,9 +13,10 @@ import { BtnsActionsComponent, ConfirmModalComponent } from 'shared';
 })
 export class ReservationCardComponent {
   @Input() reservation!: IReservationResponse;
+  @Output() deleteReservation: EventEmitter<number> =
+    new EventEmitter<number>();
   isModalOpen: boolean = false;
 
-  private readonly _useCase = inject(DeleteReservationUseCase);
   private readonly router = inject(Router);
 
   openModal(): void {
@@ -27,16 +28,10 @@ export class ReservationCardComponent {
   }
 
   confirmDelete(): void {
-    this._useCase.initSubscription();
-    this._useCase.execute(this.reservation.id);
-    this.closeModal();
+    this.deleteReservation.emit();
   }
 
   editReservation(): void {
     this.router.navigate(['/reservations/edit', this.reservation.id]);
-  }
-
-  ngOnDestroy(): void {
-    this._useCase.destroySubscription();
   }
 }

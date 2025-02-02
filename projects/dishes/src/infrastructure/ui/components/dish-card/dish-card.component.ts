@@ -1,7 +1,6 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, inject, Input, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { DeleteDishUseCase } from '../../../../application/delete-dish.usecase';
 import { IDish } from '../../../../domain/model/dish';
 import { BtnsActionsComponent, ConfirmModalComponent } from 'shared';
 
@@ -11,11 +10,11 @@ import { BtnsActionsComponent, ConfirmModalComponent } from 'shared';
   templateUrl: './dish-card.component.html',
   styleUrl: './dish-card.component.scss',
 })
-export class DishCardComponent implements OnDestroy {
+export class DishCardComponent {
   @Input() dish!: IDish;
   isModalOpen = false;
+  @Output() deleteDish: EventEmitter<number> = new EventEmitter<number>();
 
-  private readonly _useCase = inject(DeleteDishUseCase);
   private readonly router = inject(Router);
 
   openModal(): void {
@@ -27,16 +26,10 @@ export class DishCardComponent implements OnDestroy {
   }
 
   confirmDelete(): void {
-    this._useCase.initSubscription();
-    this._useCase.execute(this.dish.id);
-    this.closeModal();
+    this.deleteDish.emit();
   }
 
   editDish(): void {
     this.router.navigate(['/dishes/edit', this.dish.id]);
-  }
-
-  ngOnDestroy() {
-    this._useCase.destroySubscription();
   }
 }

@@ -4,6 +4,7 @@ import { AsyncPipe } from '@angular/common';
 import { GetAllOrderUseCase } from '../../../../application/get-all-order.usecase';
 import { interval, Observable, Subscription, switchMap } from 'rxjs';
 import { IOrderResponse } from '../../../../domain/model/orderResponse';
+import { DeleteOrderUseCase } from '../../../../application/delete-order.usecase';
 
 @Component({
   selector: 'lib-list-orders',
@@ -12,6 +13,7 @@ import { IOrderResponse } from '../../../../domain/model/orderResponse';
 })
 export class ListOrdersComponent implements OnInit, OnDestroy {
   public readonly _useCase = inject(GetAllOrderUseCase);
+  public readonly _deleteOrderUseCase = inject(DeleteOrderUseCase);
   public orders$: Observable<IOrderResponse[]>;
   private intervalSubscription: Subscription;
 
@@ -21,6 +23,12 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
     this.intervalSubscription = interval(100)
       .pipe(switchMap(async () => this._useCase.execute()))
       .subscribe();
+  }
+
+  onRequestDelete(orderId: number): void {
+    this._deleteOrderUseCase.initSubscription();
+    this._deleteOrderUseCase.execute(orderId);
+    this._deleteOrderUseCase.destroySubscription();
   }
 
   ngOnDestroy(): void {

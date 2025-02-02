@@ -1,7 +1,6 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, inject, Input, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { DeleteMenuUseCase } from '../../../../application/delete-menu.usecase';
 import { IMenuResonse } from '../../../../domain/model/menuResponse';
 import { BtnsActionsComponent, ConfirmModalComponent } from 'shared';
 
@@ -11,11 +10,11 @@ import { BtnsActionsComponent, ConfirmModalComponent } from 'shared';
   templateUrl: './menu-card.component.html',
   styleUrl: './menu-card.component.scss',
 })
-export class MenuCardComponent implements OnDestroy {
+export class MenuCardComponent {
   @Input() menu!: IMenuResonse;
+  @Output() deleteMenu: EventEmitter<number> = new EventEmitter<number>();
   isModalOpen = false;
 
-  private readonly _useCase = inject(DeleteMenuUseCase);
   private readonly router = inject(Router);
 
   openModal(): void {
@@ -27,16 +26,10 @@ export class MenuCardComponent implements OnDestroy {
   }
 
   confirmDelete(): void {
-    this._useCase.initSubscription();
-    this._useCase.execute(this.menu.id);
-    this.closeModal();
+    this.deleteMenu.emit();
   }
 
   editMenu(): void {
     this.router.navigate(['/menus/edit', this.menu.id]);
-  }
-
-  ngOnDestroy() {
-    this._useCase.destroySubscription();
   }
 }

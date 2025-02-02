@@ -5,6 +5,7 @@ import { GetAllDishesUseCase } from '../../../../application/get-all-dishes.usec
 import { Observable, Subscription, interval } from 'rxjs';
 import { IDish } from '../../../../domain/model/dish';
 import { switchMap } from 'rxjs/operators';
+import { DeleteDishUseCase } from '../../../../application/delete-dish.usecase';
 
 @Component({
   selector: 'lib-list-dishes',
@@ -13,6 +14,7 @@ import { switchMap } from 'rxjs/operators';
 })
 export class ListDishesComponent implements OnInit, OnDestroy {
   private readonly _useCase = inject(GetAllDishesUseCase);
+  private readonly _useCaseDelete = inject(DeleteDishUseCase);
   public dishes$: Observable<IDish[]>;
   private intervalSubscription: Subscription;
 
@@ -23,6 +25,12 @@ export class ListDishesComponent implements OnInit, OnDestroy {
     this.intervalSubscription = interval(100)
       .pipe(switchMap(async () => this._useCase.execute()))
       .subscribe();
+  }
+
+  onRequestDelete(dishId: number): void {
+    this._useCaseDelete.initSubscription();
+    this._useCaseDelete.execute(dishId);
+    this._useCaseDelete.destroySubscription();
   }
 
   ngOnDestroy(): void {
