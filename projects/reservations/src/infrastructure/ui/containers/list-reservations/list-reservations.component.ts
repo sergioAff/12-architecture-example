@@ -20,7 +20,7 @@ export class ListReservationsComponent implements OnInit, OnDestroy {
     this._useCase.initSubscription();
     this.reservations$ = this._useCase.reservation$();
 
-    this.intervalSubscription = interval(500)
+    this.intervalSubscription = interval(100)
       .pipe(switchMap(async () => this._useCase.execute()))
       .subscribe();
   }

@@ -27,7 +27,7 @@ export class ControlInputComponent implements OnInit, OnDestroy {
     type?: string;
     placeholder?: string;
     errorMessage?: string;
-    options?: { label: string; value: any }[];
+    options?: { label: string; value: number | string }[];
   };
   @Input() menuId!: number | null;
   @Input() orderId!: number | null;
@@ -88,7 +88,7 @@ export class ControlInputComponent implements OnInit, OnDestroy {
     }
   }
 
-  addItem(value: any): void {
+  addItem(value: unknown): void {
     if (this.control instanceof FormArray) {
       this.control.push(new FormControl(value, Validators.required));
     }

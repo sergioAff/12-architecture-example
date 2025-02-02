@@ -20,7 +20,7 @@ export class ListDishesComponent implements OnInit, OnDestroy {
     this._useCase.initSubscription();
     this.dishes$ = this._useCase.dishes$();
 
-    this.intervalSubscription = interval(500)
+    this.intervalSubscription = interval(100)
       .pipe(switchMap(async () => this._useCase.execute()))
       .subscribe();
   }

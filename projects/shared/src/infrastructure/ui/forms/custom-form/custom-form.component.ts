@@ -26,12 +26,12 @@ export class CustomFormComponent implements OnInit, OnChanges {
     label: string;
     type?: string;
     errorMessage?: string;
-    options?: { label: string; value: any }[];
+    options?: { label: string; value: string | number }[];
   }[];
   @Input() menuId!: number;
   @Input() orderId!: number;
-  @Input() formData!: any;
-  @Input() submitAction!: (data: any) => void;
+  @Input() formData!: unknown;
+  @Input() submitAction!: (data: unknown) => void;
   formGroup!: FormGroup;
 
   constructor(private fb: FormBuilder, private location: Location) {}
@@ -58,7 +58,7 @@ export class CustomFormComponent implements OnInit, OnChanges {
           ];
         }
         return acc;
-      }, {} as any)
+      }, {})
     );
 
     if (this.formData) {

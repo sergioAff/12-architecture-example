@@ -58,6 +58,7 @@ export class ContainerOrderFormComponent implements OnInit, OnDestroy {
 
   loadOrderData(id: number): void {
     this._getOrderByIdUseCase.execute(id);
+    this.loadDishes();
     this._formData = this._getOrderByIdUseCase.orders$(id);
   }
 

@@ -18,7 +18,7 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._useCase.initSubscription();
     this.orders$ = this._useCase.orders$();
-    this.intervalSubscription = interval(500)
+    this.intervalSubscription = interval(100)
       .pipe(switchMap(async () => this._useCase.execute()))
       .subscribe();
   }

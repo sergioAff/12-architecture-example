@@ -18,7 +18,7 @@ export class ListMenusComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._useCase.initSubscriptions();
     this.menus$ = this._useCase.menus$();
-    this.intervalSubscription = interval(500)
+    this.intervalSubscription = interval(100)
       .pipe(switchMap(async () => this._useCase.execute()))
       .subscribe();
   }
